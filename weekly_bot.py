@@ -38,3 +38,4 @@ def run_web():
     app.run(host="0.0.0.0", port=10000)
 
 threading.Thread(target=run_web).start()
+bot.send_message(chat_id=os.getenv("CHAT_ID"), text="✅ BOT ACTIVE")
