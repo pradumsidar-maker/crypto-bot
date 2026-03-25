@@ -1,37 +1,28 @@
-from telegram import Bo
-bot = Bot(token="8690174599:AAEMuipJVajwkZaBBsoPxsor-c1H3NxdP3M")
-
-bot.send_message(chat_id="5270697473", text="🔥 FINAL CHECK MESSAGE")
-import requests, asyncio
-from datetime import datetime, timedelta, timezone
+import os
+import time
 from telegram import Bot
-
-# ===== CONFIG =====
-TOKEN = "8690174599:AAEMuipJVajwkZaBBsoPxsor-c1H3NxdP3M"
-CHAT_ID = "5270697473"
-
-COINS = [
-    "BTCUSDT","ETHUSDT","BNBUSDT","SOLUSDT","XRPUSDT",
-    "ADAUSDT","DOGEUSDT","MATICUSDT","DOTUSDT","AVAXUSDT",
-    "LTCUSDT","TRXUSDT","SHIBUSDT","UNIUSDT","ATOMUSDT",
-    "LINKUSDT","XLMUSDT","FTMUSDT","NEARUSDT","ALGOUSDT"
-]
-
-bot = Bot(token=TOKEN)
-
-# alert status
-triggered = {
-    coin: {"high": False, "low": False, "open": False, "close": False, "zone": False}
-    for coin in COINS
-}
-
-# ===== WEEK RESET =====
-def next_week_reset():
-    now = datetime.now(timezone.utc)
-    next_monday = now + timedelta(days=(7 - now.weekday()))
 from flask import Flask
 import threading
 
+# ===== TELEGRAM SETUP =====
+BOT_TOKEN = os.getenv("8690174599:AAEMuipJVajwkZaBBsoPxsor-c1H3NxdP3M")
+CHAT_ID = os.getenv("5270697473")
+
+bot = Bot(token=BOT_TOKEN)
+
+# ===== TEST MESSAGE =====
+try:
+    bot.send_message(chat_id=CHAT_ID, text="🚀 Bot Started Successfully!")
+except Exception as e:
+    print("Telegram Error:", e)
+
+# ===== LOOP (RUNNING CHECK) =====
+def run_bot():
+    while True:
+        print("Bot is running...")
+        time.sleep(60)
+
+# ===== FLASK SERVER (FOR RENDER FREE) =====
 app = Flask(__name__)
 
 @app.route('/')
@@ -41,5 +32,6 @@ def home():
 def run_web():
     app.run(host="0.0.0.0", port=10000)
 
+# ===== RUN BOTH =====
 threading.Thread(target=run_web).start()
-bot.send_message(chat_id=os.getenv("CHAT_ID"), text="✅ BOT ACTIVE")
+run_bot()
