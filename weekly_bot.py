@@ -1,3 +1,7 @@
+from telegram import Bo
+bot = Bot(token="8690174599:AAEMuipJVajwkZaBBsoPxsor-c1H3NxdP3M")
+
+bot.send_message(chat_id="5270697473", text="🔥 FINAL CHECK MESSAGE")
 import requests, asyncio
 from datetime import datetime, timedelta, timezone
 from telegram import Bot
