@@ -25,3 +25,16 @@ triggered = {
 def next_week_reset():
     now = datetime.now(timezone.utc)
     next_monday = now + timedelta(days=(7 - now.weekday()))
+from flask import Flask
+import threading
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Bot is running"
+
+def run_web():
+    app.run(host="0.0.0.0", port=10000)
+
+threading.Thread(target=run_web).start()
