@@ -24,4 +24,4 @@ triggered = {
 # ===== WEEK RESET =====
 def next_week_reset():
     now = datetime.now(timezone.utc)
-    next_monday = now + timedelta(days=(7 - now.week
+    next_monday = now + timedelta(days=(7 - now.weekday()))
